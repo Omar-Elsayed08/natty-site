@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Natty</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script id="insert"></script>
+
+    <script src="/js/stringify.js?c967a9b82819adcc41bc5ca208a7fdfa79e4a8fb" charset="utf-8"></script>
+    <script>
+      const customConsole = (w) => {
+        const pushToConsole = (payload, type) => {
+          w.parent.postMessage({
+            console: {
+              payload: stringify(payload),
+              type:    type
+            }
+          }, "*")
+        }
+
+        w.onerror = (message, url, line, column) => {
+          // the line needs to correspond with the editor panel
+          // unfortunately this number needs to be altered every time this view is changed
+          line = line - 70
+          if (line < 0){
+            pushToConsole(message, "error")
+          } else {
+            pushToConsole(`[${line}:${column}] ${message}`, "error")
+          }
+        }
+
+        let console = (function(systemConsole){
+          return {
+            log: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "log")
+              systemConsole.log.apply(this, args)
+            },
+            info: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "info")
+              systemConsole.info.apply(this, args)
+            },
+            warn: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "warn")
+              systemConsole.warn.apply(this, args)
+            },
+            error: function(){
+              let args = Array.from(arguments)
+              pushToConsole(args, "error")
+              systemConsole.error.apply(this, args)
+            },
+            system: function(arg){
+              pushToConsole(arg, "system")
+            },
+            clear: function(){
+              systemConsole.clear.apply(this, {})
+            },
+            time: function(){
+              let args = Array.from(arguments)
+              systemConsole.time.apply(this, args)
+            },
+            assert: function(assertion, label){
+              if (!assertion){
+                pushToConsole(label, "log")
+              }
+
+              let args = Array.from(arguments)
+              systemConsole.assert.apply(this, args)
+            }
+          }
+        }(window.console))
+
+        window.console = { ...window.console, ...console }
+
+        console.system("Running fiddle")
+      }
+
+      if (window.parent){
+        customConsole(window)
+      }
+    </script>
+</head>
+
+<body>
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    
+    <div class="loader-section section-left"></div>
+          <div class="loader-section section-right"></div>
+
+  </div>
+        <header>
+        <!--NavBar-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="img/Coding-Project-Natty-Inc-2.png" width="6770px" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="results.html">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.html">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary" href="buy.html">Buy</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <br>
+
+    
+<!--Main Heading-->
+    
+<br>
+    <div class="back">
+    <main> 
+        <section id="hero">
+            <h1>Welcome to Natty</h1>
+            <p>Natty Inc. is a researched based company founded <br> in 2023. Natty Inc. wants to change the world through <br>science and innovation.</p>
+            <div class="col-md-3 text-left"><button type="button" class="btn btn-dark lg" onclick="scrollToSection('section1')">More About our products <i class="bi bi-arrow-bar-down"></i></button>
+            </div><br>
+            <div class="col-md-3 text-left"><button type="button" class="btn btn-dark lg" onclick="scrollToSection('section2')">Frequently Asked Questions <i class="bi bi-arrow-bar-down"></i></button>
+        </section>
+        </main>
+    </div>
+    
+        <!--About Us-->
+            <section class="about-us">
+              <div class="about"> 
+                  <img src="img/Coding-Project-Natty-Inc-2.png" class="pic">
+                  <div class="text">
+                    <h2>About Us</h2>
+                    <h5>Natty Inc.</h5>
+                      <p>Natty Inc. is a researched based company founded in 2023 by three geniuses. The names of these geniuses are Santiago, Victor, and Omar. Natty Inc. wants to change the world through science and innovation. Natty Inc. came up to the solution of one of the world’s problems. We at Natty Inc. have designed an antidote. We present to the world, Droids.
+                        Droids is the solution to the problem of people who are just too good. Are you tired of destroying competition? Are you bored of just being too amazingly athletic? Maybe you regret some past choices; whatever the reason is we have the solution. Our product will make you decrease in muscle mass, and so much more!</p>
+              </div>    
+              </div>   
+              </section>
+        
+    
+<!--Our Products-->
+        <div class="container-fluid">
+        <section id="HomeProducts"><h1>Our Products</h1>
+            <div class="col-md-12 text-right">
+                <a href="#" class="btn col-md-12 btn-dark btn-lg">View our Checkout Page</a>
+            </div>
+            
+            
+            <div class="container-fluid d-flex justify-content-center">
+                <div>
+            
+                    <div id="section1" class="card" style="width: 18rem;">
+                    <img src="img/syringe.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text big">Droid Syringe</p>
+                        <p class="card-text big">$750</p>
+                        
+                        <a href="#" class="btn cart third px-auto">View Details</a>
+                        <a href="#" class="btn cart btn-dark px-auto">Buy Now</a>
+                    </div>
+                    </div>
+                </div>
+    
+                <div>
+                
+                    <div class="card" style="width: 18rem;">
+                    <img src="img/juice.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text big">Droid Juice</p>
+                        <p class="card-text big">$100</p>
+                        
+                        <a href="#" class="btn cart third px-auto">View Details</a>
+                        <a href="#" class="btn btn-dark  cart px-auto">Buy Now</a>
+                    </div>
+                    </div>
+                </div>
+    
+                <div>
+                
+                    <div class="card" style="width: 18rem;">
+                    <img src="img/tablets.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text big">Droid Tablets</p>
+                        <p class="card-text big">$250</p>
+                        
+                        <a href="#" class="btn cart third px-auto">View Details</a>
+                        <a href="#" class="btn btn-dark cart px-auto">Buy Now</a>
+                    </div>
+                    </div>
+                </div>
+                <div>
+                
+                    <div class="card" style="width: 18rem;">
+                    <img src="img/powder.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text big">Droid powder</p>
+                        <p class="card-text big">$50</p>
+                        
+                        <a href="#" class="btn  cart third px-auto">View Details</a>
+                        <a href="#" class="btn btn-dark cart px-auto">Buy Now</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+           <br>
+           <br>
+           <br></div>
+
+<!--3d Model-->
+            <div  class="container">
+                <section class="about-us1">
+                    <div class="about">
+                        <iframe src="https://app.3dviewermax.com/d5e90f8a-2fc8-4b03-ac41-8a588ca280ae"  height="500" width="800" title="Syringe Model"></iframe> 
+                      <div class="text">
+                        <h2>Syringe Model</h2>
+                        <h5>-Syringes contain 2500 mg. of droidxyclaphl</h5>
+                        <h5>-Most affective product</h5>
+                        <h5>-$750</h5>
+                        <h5>-Safest needle worldwide</h5>
+                        <a href="#" class="btn btn-dark btn-lg">Buy Now</a>
+                          <p></p>
+                      </div>
+                    </div>
+                  </section>
+            </div>
+
+
+            
+            
+            
+
+              <!-- Faq-->     
+              <div id="section2" class="FAQ">
+                      <h1 class="faq-heading">FAQ'S</h1>
+                      <section class="faq-container">
+                          <div class="faq-one">
+              
+                              <!-- faq question -->
+                              <h1 class="faq-page">Why Should we be Trusted?</h1>
+              
+                              <!-- faq answer -->
+                              <div class="faq-body">
+                                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit saepe sequi, illum facere
+                                      necessitatibus cum aliquam id illo omnis maxime, totam soluta voluptate amet ut sit ipsum
+                                      aperiam.
+                                      Perspiciatis, porro!</p>
+                              </div>
+                          </div>
+                          <hr class="hr-line">
+              
+                          <div class="faq-two">
+              
+                              <!-- faq question -->
+                              <h1 class="faq-page">Are Droids Safe?</h1>
+              
+                              <!-- faq answer -->
+              
+                              <div class="faq-body">
+                                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit saepe sequi, illum facere
+                                      necessitatibus cum aliquam id illo omnis maxime, totam soluta voluptate amet ut sit ipsum
+                                      aperiam.
+                                      Perspiciatis, porro!</p>
+                              </div>
+                          </div>
+                          <hr class="hr-line">
+              
+              
+                          <div class="faq-three">
+              
+                              <!-- faq question -->
+              <h1 class="faq-page">How do Droids Work?</h1>
+              
+                              <!-- faq answer -->
+                              <div class="faq-body">
+                                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit saepe sequi, illum facere
+                                      necessitatibus cum aliquam id illo omnis maxime, totam soluta voluptate amet ut sit ipsum
+                                      aperiam.
+                                      Perspiciatis, porro!</p>
+                              </div>
+                          </div>
+              
+                      </section>
+                  
+                  <script src="main.js"></script>
+              </div>
+              
+              
+            
+              
+            
+
+
+              
+
+        
+              <script>
+                function scrollToSection(sectionId) {
+                    document.getElementById(sectionId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            </script>
+    <footer>
+        <p>&copy; 2023 Natty Inc. All rights reserved.</p>
+    </footer>
+
+    <!-- Add Bootstrap JS and jQuery for functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body></div>
+</html>
+```
+
