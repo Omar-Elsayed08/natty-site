@@ -4,6 +4,7 @@
 <head>
     <title>Natty</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="checkout.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script id="insert"></script>
 
@@ -101,11 +102,26 @@
 
         .checkout-cart {
             position: fixed;
-            top: 10px;
+            top: 150px;
             right: 10px;
             background-color: #fff;
             border: 1px solid #ddd;
             padding: 10px;
+        }
+        .checkout-cart{
+          border: 3.5px solid rgb(0, 0, 0);
+          box-shadow: 0px 0px 10px #212121;
+        }
+        .remove-btn{
+          border: 3.5px solid rgb(0, 0, 0);
+          background-color: #0c0909;
+          color: #ddd;
+        }
+        #cart-items{
+          border: 3.5px solid rgb(0, 0, 0);
+        }
+        hr{
+            border: 3.5px solid rgb(0, 0, 0);
         }
     </style>
     <title>Buy Now</title>
@@ -128,7 +144,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
@@ -138,7 +154,7 @@
                         <a class="nav-link" href="testimonials.html">Testimonials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link primary" href="buy.html">Buy</a>
+                        <a class="nav-link active" href="buy.html">Buy</a>
                     </li>
                     
                 </ul>
@@ -146,136 +162,153 @@
         </nav>
     </header>
 
+    
     <div class="container mt-5">
-        <h1>Our Products</h1>
+      <h1>Our Products</h1>
+  
+      <div class="row">
+          <!-- Product 1 -->
+          <div class="col-md-4">
+              <div class="product-card">
+                  <img src="img/powder.jpg" alt="Droid powder">
+                  <h3>Droid powder</h3>
+                  <p class="price">$50.99</p>
+                  <div class="quantity-input">
+                      <button class="quantity-btn minus-btn" data-product-id="1">-</button>
+                      <input type="text" class="quantity" value="1" readonly>
+                      <button class="quantity-btn plus-btn" data-product-id="1">+</button>
+                  </div>
+                  <button class="btn btn-primary btn-add-to-cart" data-product-id="1">Add to Cart</button>
+              </div>
+          </div>
+  
+          <!-- Product 2 -->
+          <div class="col-md-4">
+              <div class="product-card">
+                  <img src="img/tablets.jpg" alt="Droid Tablets">
+                  <h3>Droid Tablets</h3>
+                  <p class="price">$250.99</p>
+                  <div class="quantity-input">
+                      <button class="quantity-btn minus-btn" data-product-id="2">-</button>
+                      <input type="text" class="quantity" value="1" readonly>
+                      <button class="quantity-btn plus-btn" data-product-id="2">+</button>
+                  </div>
+                  <button class="btn btn-primary btn-add-to-cart" data-product-id="2">Add to Cart</button>
+              </div>
+          </div>
+  
+          <!-- Product 3 -->
+          <div class="col-md-4">
+              <div class="product-card">
+                  <img src="img/syringe.jpg" alt="Droid Syringe">
+                  <h3>Droid Syringe</h3>
+                  <p class="price">$750.99</p>
+                  <div class="quantity-input">
+                      <button class="quantity-btn minus-btn" data-product-id="3">-</button>
+                      <input type="text" class="quantity" value="1" readonly>
+                      <button class="quantity-btn plus-btn" data-product-id="3">+</button>
+                  </div>
+                  <button class="btn btn-primary btn-add-to-cart" data-product-id="3">Add to Cart</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Checkout Cart -->
+  
+  
+  
+  <div class="checkout-cart">
+      <h4>Checkout Cart</h4>
+      <hr>
+      <ul id="cart-items">
+          <!-- Cart items will be added dynamically using JavaScript -->
+      </ul>
+      <p>Total: <span id="cart-total">$0.00</span></p>
+      <a href="checkout.html" class="btn btn-dark cart third px-auto">Checkout</a>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+      // Sample product data
+      const products = [
+          { id: 1, name: 'Droid powder', price: 50.99 },
+          { id: 2, name: 'Droid Tablets', price: 250.99 },
+          { id: 3, name: 'Droid Syringe', price: 750.99 },
+          // Add details for other products
+      ];
+  
+      // Cart data
+      const cart = [];
+  
+      // Event listener for Add to Cart button
+      $('.btn-add-to-cart').on('click', function () {
+          const productId = $(this).data('product-id');
+          const product = products.find(p => p.id === productId);
+          const quantity = parseInt($(this).siblings('.quantity-input').find('.quantity').val());
+  
+          if (product) {
+              // Add the product with quantity to the cart
+              cart.push({ ...product, quantity });
+              updateCart();
+          }
+      });
+  
+      // Event listener for quantity buttons
+      $('.quantity-btn').on('click', function () {
+          const productId = $(this).data('product-id');
+          const input = $(this).siblings('.quantity');
+          let quantity = parseInt(input.val());
+  
+          if ($(this).hasClass('plus-btn')) {
+              quantity++;
+          } else if ($(this).hasClass('minus-btn') && quantity > 1) {
+              quantity--;
+          }
+  
+          input.val(quantity);
+      });
+  
+      // Event listener for Remove button
+      $('#cart-items').on('click', '.remove-btn', function () {
+          const productId = $(this).data('product-id');
+          const index = cart.findIndex(item => item.id === productId);
+  
+          if (index !== -1) {
+              cart.splice(index, 1);
+              updateCart();
+          }
+      });
+  
+      // Event listener for Checkout button
+      $('#checkout-btn').on('click', function () {
+          // Implement your checkout logic here
+          alert('Implement your checkout logic here!');
+      });
+  
+      // Update the cart and display
+      function updateCart() {
+          const cartItems = $('#cart-items');
+          const cartTotal = $('#cart-total');
+  
+          cartItems.empty();
+          let total = 0;
+  
+          cart.forEach(item => {
+              const li = `<li>${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} items) <button class="remove-btn" data-product-id="${item.id}">Remove</button></li>`;
+              cartItems.append(li);
+              total += item.price * item.quantity;
+          });
+  
+          cartTotal.text(`$${total.toFixed(2)}`);
+      }
+  </script>
+  
 
-        <div class="row">
-            <!-- Product 1 -->
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="img/powder.jpg" alt="Product 1">
-                    <h3>Product 1</h3>
-                    <p>$50.99</p>
-                    <button class="btn btn-primary btn-add-to-cart" data-product-id="1">Add to Cart</button>
-                </div>
-            </div>
 
 
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="img/tablets.jpg" alt="Product 2">
-                    <h3>Product 1</h3>
-                    <p>$250.99</p>
-                    <button class="btn btn-primary btn-add-to-cart" data-product-id="2">Add to Cart</button>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="img/syringe.jpg" alt="Product 3">
-                    <h3>Product 1</h3>
-                    <p>$750.99</p>
-                    <button class="btn btn-primary btn-add-to-cart" data-product-id="3">Add to Cart</button>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Repeat similar structure for other products -->
-
-        </div>
-    </div>
-
-    <!-- Checkout Cart -->
-    <div class="checkout-cart">
-        <h4>Checkout Cart</h4>
-        <ul id="cart-items">
-            <!-- Cart items will be added dynamically using JavaScript -->
-        </ul>
-        <p>Total: <span id="cart-total">$0.00</span></p>
-        <button class="btn btn-success">Checkout</button>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Sample product data
-        const products = [
-            { id: 1, name: 'Product 1', price: 50.99 },
-            // Add details for other products
-        ];
-
-        const products2 = [
-            { id: 2, name: 'Product 2', price: 250.99 },
-            // Add details for other products
-        ];
-
-
-
-
-
-
-
-
-        
-        // Cart data
-        const cart = [];
-
-        // Event listener for Add to Cart button
-        $('.btn-add-to-cart').on('click', function () {
-            const productId = $(this).data('product-id');
-            const product = products.find(p => p.id === productId);
-
-            if (product) {
-                cart.push(product);
-                updateCart();
-            }
-        });
-
-        // Update the cart and display
-        function updateCart() {
-            const cartItems = $('#cart-items');
-            const cartTotal = $('#cart-total');
-
-            cartItems.empty();
-            let total = 0;
-
-            cart.forEach(item => {
-                const li = `<li>${item.name} - $${item.price.toFixed(2)}</li>`;
-                cartItems.append(li);
-                total += item.price;
-            });
-
-            cartTotal.text(`$${total.toFixed(2)}`);
-        }
-    </script>
 </body>
 
 </html>
