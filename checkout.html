@@ -145,7 +145,17 @@
             { name: 'Droid Tablets', price: 250.99, quantity: 1 },
             { name: 'Droid Syringe', price: 750.99, quantity: 1 }
         ];
+ 
 
+
+
+
+
+
+
+
+
+        
         // Function to update the cart on the checkout page
         function updateCheckoutCart() {
             const cartItemsList = $('#cart-items-list');
@@ -168,6 +178,24 @@
 
         // Initialize the checkout cart on page load
         updateCheckoutCart();
+
+
+
+       
+
+    // Load cart data from local storage
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+        cart = JSON.parse(storedCart);
+        updateCheckoutCart();
+    }
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

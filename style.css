@@ -10,7 +10,7 @@
         h1{
             font-family:Font1;
         } 
-        p{
+        p,h3,div{
             font-family: Font1;
         }
 
@@ -37,6 +37,8 @@
             background-repeat: no-repeat;
             background-position:top right; 
             background-size: 600px;
+    
+            
             
             
             

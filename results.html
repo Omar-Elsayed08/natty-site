@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Document</title>
     <style>
+/* Add this CSS for image hover effect */
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-container img {
+  transition: transform 0.3s ease; /* Adding transition for smooth effect */
+}
+
+.img-container:hover img {
+  transform: scale(1.1); /* Scaling the image on hover */
+}
 
     </style>
     
@@ -48,42 +61,57 @@
     <h1>Results</h1>
     <br>
     <br>
-    <br>
-    <br>
+    
+    <h1>Before and After</h1>
+    
     <!-- Your existing HTML code -->
 
 <div class="image-container">
     <div class="img-container">
         <img src="img/Coding Project Natty Inc.png" alt="before">
         <div class="overlay-text">
-            <h2>Before</h2>
+            
         </div>
     </div>
     <div class="img-container">
         <img src="img/elliot.png" alt="after">
         <div class="overlay-text">
-            <h2>After</h2>
+           
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
 <h2>This is Elliot Enyeart. He is our most famous customer. Mr. Enyeart won 8 Mr. Olympias. After his incredible body building career, he decided it was time to get a little smaller. He then bought our product, Droids. Mr. Enyeart loves our product. </h2>
+<br>
+<br>
+<br>
 
-
-<div class="col">
-    <div class="card h-100">
-      <img src="img/elliot.png" class="card-img-top" alt="Skyscrapers"/>
-      <div class="card-body card_content">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          “Oh my goodness! I have changed so much after using this product! Thank you Natty Inc!!!”
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <img src="img/elliot.png" class="card-img-top" alt="Elliot" style="max-height: 800px;">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: 1.2rem;">Elliot-</h5>
+                <p class="card-text" style="font-size: 1.8rem;">
+                    “Oh my goodness! I have changed so much after using this product! Thank you Natty Inc!!!”
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 
+    <iframe width="420" height="345" src="https://www.youtube.com/shorts/EtaJ5jrU8ZU">
+    </iframe>
+
+    
+  
+  <div class="col-md-12 text-right">
+    <a href="testimonials.html" class="btn col-md-12 btn-dark btn-lg">View more reviews</a>
+</div>
+<footer>
+    <p>&copy; 2023 Natty Inc. All rights reserved.</p>
+</footer>
     
     
     </body>
