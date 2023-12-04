@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Natty</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script id="insert"></script>
+
+    <script src="/js/stringify.js?c967a9b82819adcc41bc5ca208a7fdfa79e4a8fb" charset="utf-8"></script>
+
+    <style>
+    
+        .product-card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+    
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+    
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    
+        .price {
+            color: #007bff;
+            font-size: 1.25rem;
+            margin-top: 10px;
+        }
+    
+        .quantity-input {
+            margin-top: 15px;
+        }
+    
+        .quantity-btn {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    
+        .quantity-btn:hover {
+            background-color: #0056b3;
+        }
+    
+        .btn-add-to-cart {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.25rem;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    
+        .btn-add-to-cart:hover {
+            background-color: #218838;
+        }
+    
+        .checkout-cart {
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #999;
+        }
+    
+        .checkout-cart h4 {
+            color: #343a40;
+            margin-bottom: 15px;
+        }
+    
+        #cart-items li {
+            list-style: none;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+    
+        .remove-btn {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+    
+        hr {
+            border: 3.5px solid #343a40;
+        }
+    
+        #cart-total {
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+    
+        .btn-checkout {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.25rem;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    
+        .btn-checkout:hover {
+            background-color: #0056b3;
+        }
+        .carousel-control-prev{
+            background-color:black
+        }
+        .container{
+            background-color: #343a40;
+        }
+        .carousel{
+            background-color: #343a40;
+            color: #343a40;
+        }
+    </style>
+    <title>Buy Now</title>
+</head>
+
+<body>
+
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Your existing navigation bar code goes here -->
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Our Products</h1>
+
+        <!-- Bootstrap Carousel -->
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Product 1 -->
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="img/powder.jpg" alt="Droid powder">
+                                <h3>Droid powder</h3>
+                                <p class="price">$50.99</p>
+                                <!-- Additional product details go here -->
+                                <div class="quantity-input">
+                                    <button class="quantity-btn minus-btn" data-product-id="1">-</button>
+                                    <input type="text" class="quantity" value="1" readonly>
+                                    <button class="quantity-btn plus-btn" data-product-id="1">+</button>
+                                </div>
+                                <button class="btn btn-add-to-cart" data-product-id="1">Add to Cart</button>
+                            </div>
+                        </div>
+                        <!-- Add other product items here as additional columns -->
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="img/tablets.jpg" alt="Droid Tablets">
+                                <h3>Droid Tablets</h3>
+                                <p class="price">$250.99</p>
+                                <!-- Additional product details go here -->
+                                <div class="quantity-input">
+                                    <button class="quantity-btn minus-btn" data-product-id="2">-</button>
+                                    <input type="text" class="quantity" value="1" readonly>
+                                    <button class="quantity-btn plus-btn" data-product-id="2">+</button>
+                                </div>
+                                <button class="btn btn-primary btn-add-to-cart" data-product-id="2">Add to Cart</button>
+                            </div>
+                        </div>
+                        <!-- Add other product items here as additional columns -->
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="img/syringe.jpg" alt="Droid Syringe">
+                                <h3>Droid Syringe</h3>
+                                <p class="price">$750.99</p>
+                                <!-- Additional product details go here -->
+                                <div class="quantity-input">
+                                    <button class="quantity-btn minus-btn" data-product-id="3">-</button>
+                                    <input type="text" class="quantity" value="1" readonly>
+                                    <button class="quantity-btn plus-btn" data-product-id="3">+</button>
+                                </div>
+                                <button class="btn btn-primary btn-add-to-cart" data-product-id="3">Add to Cart</button>
+                            </div>
+                        </div>
+                        <!-- Add other product items here as additional columns -->
+                    </div>
+                </div>
+
+                <!-- Add more carousel items for additional products -->
+
+            </div>
+
+            <!-- Carousel Navigation -->
+            <a class="carousel-control-prev-dark" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Checkout Cart -->
+    <div class="checkout-cart">
+        <!-- Your existing checkout cart code goes here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Your existing JavaScript code goes here
+    </script>
+
+</body>
+
+</html>

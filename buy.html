@@ -4,126 +4,144 @@
 <head>
     <title>Natty</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="checkout.css">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script id="insert"></script>
 
     <script src="/js/stringify.js?c967a9b82819adcc41bc5ca208a7fdfa79e4a8fb" charset="utf-8"></script>
-    <script>
-      const customConsole = (w) => {
-        const pushToConsole = (payload, type) => {
-          w.parent.postMessage({
-            console: {
-              payload: stringify(payload),
-              type:    type
-            }
-          }, "*")
-        }
 
-        w.onerror = (message, url, line, column) => {
-          // the line needs to correspond with the editor panel
-          // unfortunately this number needs to be altered every time this view is changed
-          line = line - 70
-          if (line < 0){
-            pushToConsole(message, "error")
-          } else {
-            pushToConsole(`[${line}:${column}] ${message}`, "error")
-          }
-        }
-
-        let console = (function(systemConsole){
-          return {
-            log: function(){
-              let args = Array.from(arguments)
-              pushToConsole(args, "log")
-              systemConsole.log.apply(this, args)
-            },
-            info: function(){
-              let args = Array.from(arguments)
-              pushToConsole(args, "info")
-              systemConsole.info.apply(this, args)
-            },
-            warn: function(){
-              let args = Array.from(arguments)
-              pushToConsole(args, "warn")
-              systemConsole.warn.apply(this, args)
-            },
-            error: function(){
-              let args = Array.from(arguments)
-              pushToConsole(args, "error")
-              systemConsole.error.apply(this, args)
-            },
-            system: function(arg){
-              pushToConsole(arg, "system")
-            },
-            clear: function(){
-              systemConsole.clear.apply(this, {})
-            },
-            time: function(){
-              let args = Array.from(arguments)
-              systemConsole.time.apply(this, args)
-            },
-            assert: function(assertion, label){
-              if (!assertion){
-                pushToConsole(label, "log")
-              }
-
-              let args = Array.from(arguments)
-              systemConsole.assert.apply(this, args)
-            }
-          }
-        }(window.console))
-
-        window.console = { ...window.console, ...console }
-
-        console.system("Running fiddle")
-      }
-
-      if (window.parent){
-        customConsole(window)
-      }
-    </script>
-</head>
-
-<body>
+  <style>
     
-    
-    <style>
-        body {
-            padding-top: 56px; /* Adjust based on your header height */
-        }
+    .product-card {
+        border: 1px solid #ddd;
+        margin: 10px;
+        padding: 15px;
+        text-align: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
 
-        .product-card {
-            border: 1px solid #ddd;
-            margin: 10px;
-            padding: 15px;
-            text-align: center;
-        }
+    .product-card:hover {
+        transform: scale(1.05);
+    }
 
-        .checkout-cart {
-            position: fixed;
-            top: 150px;
-            right: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-        .checkout-cart{
-          border: 3.5px solid rgb(0, 0, 0);
-          box-shadow: 0px 0px 10px #212121;
-        }
-        .remove-btn{
-          border: 3.5px solid rgb(0, 0, 0);
-          background-color: #0c0909;
-          color: #ddd;
-        }
-        #cart-items{
-          border: 3.5px solid rgb(0, 0, 0);
-        }
-        hr{
-            border: 3.5px solid rgb(0, 0, 0);
-        }
-    </style>
+    .product-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .price {
+        color: #007bff;
+        font-size: 1.25rem;
+        margin-top: 10px;
+    }
+
+    .quantity-input {
+        margin-top: 15px;
+    }
+
+    .quantity-btn {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 8px 12px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .quantity-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-add-to-cart {
+        background-color: #28a745;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.25rem;
+        margin-top: 15px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #218838;
+    }
+
+    .checkout-cart {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #999;
+    }
+
+    .checkout-cart h4 {
+        color: #343a40;
+        margin-bottom: 15px;
+    }
+
+    #cart-items li {
+        list-style: none;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    .remove-btn {
+        background-color: #dc3545;
+        color: #ffffff;
+        border: none;
+        padding: 5px 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .remove-btn:hover {
+        background-color: #c82333;
+    }
+
+    hr {
+        border: 3.5px solid #343a40;
+    }
+
+    #cart-total {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .btn-checkout {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.25rem;
+        margin-top: 15px;
+        cursor: pointer;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+    .btn-checkout:hover {
+        background-color: #0056b3;
+    }
+    .quantity-input {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+</style>
     <title>Buy Now</title>
 </head>
 
@@ -163,9 +181,8 @@
     </header>
 
     
-    <div class="container mt-5">
+    <div class="container">
       <h1>Our Products</h1>
-  
       <div class="row">
           <!-- Product 1 -->
           <div class="col-md-4">
@@ -174,18 +191,23 @@
                   <h3>Droid powder</h3>
                   <p class="price">$50.99</p>
                   <div class="quantity-input">
-                      <button class="quantity-btn minus-btn" data-product-id="1">-</button>
+                      <button class="quantity-btn minus-btn" data-product-id="1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square-dotted" viewBox="0 0 16 16">
+                        <path d="M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0zm2.292 0h-.917v1h.917zm1.833 0h-.917v1h.917zm1.833 0h-.916v1h.916zm1.834 0h-.917v1h.917zm1.833 0h-.917v1h.917zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0m2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917zm16 .917v-.917h-1v.917zM0 5.708v.917h1v-.917zm16 .917v-.917h-1v.917zM0 7.542v.916h1v-.916zm15 .916h1v-.916h-1zM0 9.375v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .916v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487M.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1zm-9.625 0h.917v-1h-.917zm1.833 0h.917v-1h-.917zm1.834 0h.916v-1h-.916zm1.833 0h.917v-1h-.917zm1.833 0h.917v-1h-.917zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z"/>
+                      </svg></button>
                       <input type="text" class="quantity" value="1" readonly>
-                      <button class="quantity-btn plus-btn" data-product-id="1">+</button>
+                      <button class="quantity-btn plus-btn" data-product-id="1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5"/>
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                      </svg></button>
                   </div>
-                  <button class="btn btn-primary btn-add-to-cart" data-product-id="1">Add to Cart</button>
+                  <button class="btn btn-add-to-cart" data-product-id="1">Add to Cart</button>
               </div>
           </div>
   
           <!-- Product 2 -->
           <div class="col-md-4">
               <div class="product-card">
-                  <img src="img/tablets.jpg" alt="Droid Tablets">
+                  <img src="img/tablets.jpg" height="2px" alt="Droid Tablets">
                   <h3>Droid Tablets</h3>
                   <p class="price">$250.99</p>
                   <div class="quantity-input">
@@ -198,6 +220,22 @@
           </div>
   
           <!-- Product 3 -->
+          <div class="col-md-4">
+            <div class="product-card">
+                <img src="img/syringe.jpg" alt="Droid Syringe">
+                <h3>Droid Syringe</h3>
+                <p class="price">$750.99</p>
+                <div class="quantity-input">
+                    <button class="quantity-btn minus-btn" data-product-id="3">-</button>
+                    <input type="text" class="quantity" value="1" readonly>
+                    <button class="quantity-btn plus-btn" data-product-id="3">+</button>
+                </div>
+                <button class="btn btn-primary btn-add-to-cart" data-product-id="3">Add to Cart</button>
+            </div>
+        </div>
+        
+  
+          <!-- Product 4 -->
           <div class="col-md-4">
               <div class="product-card">
                   <img src="img/syringe.jpg" alt="Droid Syringe">
@@ -214,6 +252,8 @@
       </div>
   </div>
   
+
+      
   <!-- Checkout Cart -->
   
   
@@ -231,80 +271,96 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-      // Sample product data
-      const products = [
-          { id: 1, name: 'Droid powder', price: 50.99 },
-          { id: 2, name: 'Droid Tablets', price: 250.99 },
-          { id: 3, name: 'Droid Syringe', price: 750.99 },
-          // Add details for other products
-      ];
-  
-      // Cart data
-      const cart = [];
-  
-      // Event listener for Add to Cart button
-      $('.btn-add-to-cart').on('click', function () {
-          const productId = $(this).data('product-id');
-          const product = products.find(p => p.id === productId);
-          const quantity = parseInt($(this).siblings('.quantity-input').find('.quantity').val());
-  
-          if (product) {
-              // Add the product with quantity to the cart
-              cart.push({ ...product, quantity });
-              updateCart();
-          }
-      });
-  
-      // Event listener for quantity buttons
-      $('.quantity-btn').on('click', function () {
-          const productId = $(this).data('product-id');
-          const input = $(this).siblings('.quantity');
-          let quantity = parseInt(input.val());
-  
-          if ($(this).hasClass('plus-btn')) {
-              quantity++;
-          } else if ($(this).hasClass('minus-btn') && quantity > 1) {
-              quantity--;
-          }
-  
-          input.val(quantity);
-      });
-  
-      // Event listener for Remove button
-      $('#cart-items').on('click', '.remove-btn', function () {
-          const productId = $(this).data('product-id');
-          const index = cart.findIndex(item => item.id === productId);
-  
-          if (index !== -1) {
-              cart.splice(index, 1);
-              updateCart();
-          }
-      });
-  
-      // Event listener for Checkout button
-      $('#checkout-btn').on('click', function () {
-          // Implement your checkout logic here
-          alert('Implement your checkout logic here!');
-      });
-  
-      // Update the cart and display
-      function updateCart() {
-          const cartItems = $('#cart-items');
-          const cartTotal = $('#cart-total');
-  
-          cartItems.empty();
-          let total = 0;
-  
-          cart.forEach(item => {
-              const li = `<li>${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} items) <button class="remove-btn" data-product-id="${item.id}">Remove</button></li>`;
-              cartItems.append(li);
-              total += item.price * item.quantity;
-          });
-  
-          cartTotal.text(`$${total.toFixed(2)}`);
+
+
+<script>
+  // Sample product data with images
+  const products = [
+      { id: 1, name: 'Droid powder', price: 50.99, productType: 'powder' },
+      { id: 2, name: 'Droid Tablets', price: 250.99, productType: 'tablets' },
+      { id: 3, name: 'Droid Syringe', price: 750.99, productType: 'syringe' },
+      // Add details for other products
+  ];
+
+  // Cart data
+  const cart = [];
+
+  // Event listener for Add to Cart button
+  $('.btn-add-to-cart').on('click', function () {
+      const productId = $(this).data('product-id');
+      const product = products.find(p => p.id === productId);
+      const quantity = parseInt($(this).siblings('.quantity-input').find('.quantity').val());
+
+      if (product) {
+          // Add the product with quantity to the cart
+          cart.push({ ...product, quantity });
+          updateCart();
       }
-  </script>
+  });
+
+  // Event listener for quantity buttons
+  $('.quantity-btn').on('click', function () {
+      const productId = $(this).data('product-id');
+      const input = $(this).siblings('.quantity');
+      let quantity = parseInt(input.val());
+
+      if ($(this).hasClass('plus-btn')) {
+          quantity++;
+      } else if ($(this).hasClass('minus-btn') && quantity > 1) {
+          quantity--;
+      }
+
+      input.val(quantity);
+  });
+
+  // Event listener for Remove button
+  $('#cart-items').on('click', '.remove-btn', function () {
+      const productId = $(this).data('product-id');
+      const index = cart.findIndex(item => item.id === productId);
+
+      if (index !== -1) {
+          cart.splice(index, 1);
+          updateCart();
+      }
+  });
+
+  // Update the cart and display
+  function updateCart() {
+      const cartItems = $('#cart-items');
+      const cartTotal = $('#cart-total');
+
+      cartItems.empty();
+      let total = 0;
+
+      cart.forEach(item => {
+          let imageUrl;
+          // Check for specific products and assign corresponding images
+          if (item.productType === 'powder') {
+              imageUrl = 'img/powder.jpg';
+          } else if (item.productType === 'tablets') {
+              imageUrl = 'img/tablets.jpg';
+          } else if (item.productType === 'syringe') {
+              imageUrl = 'img/syringe.jpg';
+          } else {
+              // Use a default image for other products
+              imageUrl = 'img/default.jpg';
+          }
+
+          const li = `<li>
+              <img src="${imageUrl}" alt="${item.name}" style="width: 50px; height: 50px; margin-right: 10px;">
+              ${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} items)
+              <button class="remove-btn" data-product-id="${item.id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg></button>
+          </li>`;
+          cartItems.append(li);
+          total += item.price * item.quantity;
+      });
+
+      cartTotal.text(`$${total.toFixed(2)}`);
+  }
+</script>
+
   
 
 
