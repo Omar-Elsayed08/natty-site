@@ -4,6 +4,10 @@
                 margin: 0;
                 padding: 0;
             }
+            html,
+                body {
+            scroll-behavior: smooth;
+                }
 
             @font-face {
                 font-family: Font1;
@@ -222,6 +226,7 @@
                 padding: 90px 0;
                 background-color: #d6dbeb;
                 box-shadow: 0px 0px 6px #212121;
+                ;
             }
 
             .pic {
@@ -240,12 +245,14 @@
 
             .text {
                 width: 540px;
+                padding: 10px ;
             }
 
             .text h2 {
-                font-size: 60px;
+                font-size: 50px;
                 font-weight: 100;
                 margin-bottom: 10px;
+                text-align: center;
 
             }
 
@@ -772,7 +779,7 @@
             .shop1 {
                 box-shadow: 0px 0px 16px #000000;
                 width: 19rem;
-                border: 4px;
+                border: 2px;
             }
 
 
@@ -824,7 +831,7 @@
                 z-index: 99; /* Make sure it does not overlap */
                 border: none; /* Remove borders */
                 outline: none; /* Remove outline */
-                background-color: red; /* Set a background color */
+                background-color: rgb(5, 3, 3); /* Set a background color */
                 color: white; /* Text color */
                 cursor: pointer; /* Add a mouse pointer on hover */
                 padding: 15px; /* Some padding */
@@ -835,12 +842,69 @@
               #myBtn:hover {
                 background-color: #555; /* Add a dark-grey background on hover */
               }
-            @media screen and (max-width: 600px) {
-                .shop1 {
-                    width: 12rem;
-                }
-                .about{
-                    display: flex45;  
-                }
-
+              .top {
+                --offset: 50px; 
+                
+                position: sticky;
+                bottom: 20px;      
+                margin-right:10px; 
+                place-self: end;
+                margin-top: calc(100vh + var(--offset));
+                
+                /* visual styling */
+                text-decoration: none;
+                padding: 10px;
+                font-family: sans-serif;
+                color: #fff;
+                background: #000;
+                border-radius: 100px;
+                white-space: nowrap;
+              }
+              
+              p {
+                font-size: 25px;
+              }
+              
+              /* remove the below if you don't want smooth scrolling */
+              html,
+              body {
+                  scroll-behavior: smooth;
+              }
+              .c11{
+                color: rgb(0, 0, 0);
+              }
+              .c12{
+                color: whitesmoke;
+              }
+              .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+                display: block;
             }
+    
+            .navbar-nav .nav-item.dropdown:hover .dropdown-menu a {
+                opacity: 0;
+                animation: fadeIn 0.6s ease forwards;
+            }
+    
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+    
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+
+              @media screen and (max-width: 448px) {
+                .shop1 {
+                    width: 20rem;
+                    
+                }
+                .about {
+                    display: flex65;  
+                }
+            }
+            
