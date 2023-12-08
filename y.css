@@ -23,7 +23,6 @@
 
 .container form {
     background: #fff;
-    border-radius: 5px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
     padding: 20px;
     width: 600px;
@@ -44,7 +43,7 @@
 .container form .inputBox select {
     width: 100%;
     padding: 10px;
-    border-radius: 10px;
+    
     border: 1px solid rgba(0, 0, 0, .3);
     color: #444;
 }
@@ -65,7 +64,7 @@
     padding: 10px;
     font-size: 20px;
     color: #fff;
-    border-radius: 10px;
+    
     cursor: pointer;
     transition: .2s linear;
 }
