@@ -210,19 +210,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            About
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="about.html">About Us</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="droid.html">About Droids</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="results.html">Results</a>
@@ -237,7 +231,6 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
         <h1>Our Products</h1>
         <div class="row">
@@ -308,304 +301,289 @@
             </div>
 
 
-            <!-- Product 4 -->
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="img/syringe.jpg" alt="Droid Syringe">
-                    <h3>Droid Syringe</h3>
-                    <p class="price">$750.99</p>
-                    <div class="quantity-input">
-                        <button class="quantity-btn minus-btn" data-product-id="3">-</button>
-                        <input type="text" class="quantity" value="1" readonly>
-                        <button class="quantity-btn plus-btn" data-product-id="3">+</button>
-                    </div>
-                    <button class="btn btn-primary btn-add-to-cart" data-product-id="3">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+            <!-- Checkout Cart -->
 
 
 
-    <!-- Checkout Cart -->
+            <div class="checkout-cart">
+                <h4>Checkout Cart</h4>
+                <hr>
+                <ul id="cart-items">
+                    <!-- Cart items will be added dynamically using JavaScript -->
+                </ul>
+                <p>Total: <span id="cart-total">$0.00</span></p>
 
+                <button class="btn-checkout" onclick="showPopup()">Checkout</button>
 
+                <!-- Popup container -->
+                <div id="overlay"></div>
+                <div id="popupContainer">
+                    <span id="closeBtn" onclick="hidePopup()">&times;</span>
+                    <div id="popupContent" contenteditable="true">
+                        <!-- Editable content goes here -->
 
-    <div class="checkout-cart">
-        <h4>Checkout Cart</h4>
-        <hr>
-        <ul id="cart-items">
-            <!-- Cart items will be added dynamically using JavaScript -->
-        </ul>
-        <p>Total: <span id="cart-total">$0.00</span></p>
+                        <div class="container">
 
-        <button class="btn-checkout" onclick="showPopup()">Checkout</button>
+                            <div class="card-container">
 
-        <!-- Popup container -->
-        <div id="overlay"></div>
-        <div id="popupContainer">
-            <span id="closeBtn" onclick="hidePopup()">&times;</span>
-            <div id="popupContent" contenteditable="true">
-                <!-- Editable content goes here -->
-
-                <div class="container">
-
-                    <div class="card-container">
-
-                        <div class="front">
-                            <div class="image">
-                                <img src="img/chip.png" alt="">
-                                <img src="img/visa.png" alt="">
-                            </div>
-                            <div class="card-number-box">################</div>
-                            <div class="flexbox">
-                                <div class="box">
-                                    <span>card holder</span>
-                                    <div class="card-holder-name">full name</div>
-                                </div>
-                                <div class="box">
-                                    <span>expires</span>
-                                    <div class="expiration">
-                                        <span class="exp-month">mm</span>
-                                        <span class="exp-year">yy</span>
+                                <div class="front">
+                                    <div class="image">
+                                        <img src="img/chip.png" alt="">
+                                        <img src="img/visa.png" alt="">
+                                    </div>
+                                    <div class="card-number-box">################</div>
+                                    <div class="flexbox">
+                                        <div class="box">
+                                            <span>card holder</span>
+                                            <div class="card-holder-name">full name</div>
+                                        </div>
+                                        <div class="box">
+                                            <span>expires</span>
+                                            <div class="expiration">
+                                                <span class="exp-month">mm</span>
+                                                <span class="exp-year">yy</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="back">
+                                    <div class="stripe"></div>
+                                    <div class="box">
+                                        <span>cvv</span>
+                                        <div class="cvv-box"></div>
+                                        <img src="img/visa.png" alt="">
+                                    </div>
+                                </div>
+
                             </div>
+
+                            <form>
+                                <div class="inputBox">
+                                    <span>card number</span>
+                                    <input type="text" maxlength="16" class="card-number-input">
+                                </div>
+                                <div class="inputBox">
+                                    <span>card holder</span>
+                                    <input type="text" class="card-holder-input">
+                                </div>
+                                <div class="flexbox">
+                                    <div class="inputBox">
+                                        <span>expiration mm</span>
+                                        <select name="" id="" class="month-input">
+                                            <option value="month" selected disabled>month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="inputBox">
+                                        <span>expiration yy</span>
+                                        <select name="" id="" class="year-input">
+                                            <option value="year" selected disabled>year</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select>
+                                    </div>
+                                    <div class="inputBox">
+                                        <span>cvv</span>
+                                        <input type="text" maxlength="4" class="cvv-input">
+                                    </div>
+                                </div>
+                            </form>
+
+                            <button class="submit-btn" onclick="location.assign('order.html')">Submit </button>
+
                         </div>
 
-                        <div class="back">
-                            <div class="stripe"></div>
-                            <div class="box">
-                                <span>cvv</span>
-                                <div class="cvv-box"></div>
-                                <img src="img/visa.png" alt="">
-                            </div>
-                        </div>
+
+
+
 
                     </div>
 
-                    <form>
-                        <div class="inputBox">
-                            <span>card number</span>
-                            <input type="text" maxlength="16" class="card-number-input">
-                        </div>
-                        <div class="inputBox">
-                            <span>card holder</span>
-                            <input type="text" class="card-holder-input">
-                        </div>
-                        <div class="flexbox">
-                            <div class="inputBox">
-                                <span>expiration mm</span>
-                                <select name="" id="" class="month-input">
-                                    <option value="month" selected disabled>month</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                            <div class="inputBox">
-                                <span>expiration yy</span>
-                                <select name="" id="" class="year-input">
-                                    <option value="year" selected disabled>year</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                    <option value="2028">2028</option>
-                                    <option value="2029">2029</option>
-                                    <option value="2030">2030</option>
-                                </select>
-                            </div>
-                            <div class="inputBox">
-                                <span>cvv</span>
-                                <input type="text" maxlength="4" class="cvv-input">
-                            </div>
-                        </div>
-                    </form>
-
-                        <button class="submit-btn" onclick="location.assign('order.html')">Submit </button>
 
                 </div>
 
-
-
-                
-
             </div>
 
-        
-    </div>
-
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <script>
-        // Sample product data with images
-        const products = [{
-                id: 1,
-                name: 'Droid powder',
-                price: 50.99,
-                productType: 'powder'
-            },
-            {
-                id: 2,
-                name: 'Droid Tablets',
-                price: 250.99,
-                productType: 'tablets'
-            },
-            {
-                id: 3,
-                name: 'Droid Syringe',
-                price: 750.99,
-                productType: 'syringe'
-            },
-            // Add details for other products
-        ];
+            <script>
+                // Sample product data with images
+                const products = [{
+                        id: 1,
+                        name: 'Droid powder',
+                        price: 50.99,
+                        productType: 'powder'
+                    },
+                    {
+                        id: 2,
+                        name: 'Droid Tablets',
+                        price: 250.99,
+                        productType: 'tablets'
+                    },
+                    {
+                        id: 3,
+                        name: 'Droid Syringe',
+                        price: 750.99,
+                        productType: 'syringe'
+                    },
+                    // Add details for other products
+                ];
 
-        // Cart data
-        const cart = [];
+                // Cart data
+                const cart = [];
 
-        // Event listener for Add to Cart button
-        $('.btn-add-to-cart').on('click', function () {
-            const productId = $(this).data('product-id');
-            const product = products.find(p => p.id === productId);
-            const quantity = parseInt($(this).siblings('.quantity-input').find('.quantity').val());
+                // Event listener for Add to Cart button
+                $('.btn-add-to-cart').on('click', function () {
+                    const productId = $(this).data('product-id');
+                    const product = products.find(p => p.id === productId);
+                    const quantity = parseInt($(this).siblings('.quantity-input').find('.quantity').val());
 
-            if (product) {
-                // Add the product with quantity to the cart
-                cart.push({
-                    ...product,
-                    quantity
+                    if (product) {
+                        // Add the product with quantity to the cart
+                        cart.push({
+                            ...product,
+                            quantity
+                        });
+                        updateCart();
+                    }
                 });
-                updateCart();
-            }
-        });
 
-        // Event listener for quantity buttons
-        $('.quantity-btn').on('click', function () {
-            const productId = $(this).data('product-id');
-            const input = $(this).siblings('.quantity');
-            let quantity = parseInt(input.val());
+                // Event listener for quantity buttons
+                $('.quantity-btn').on('click', function () {
+                    const productId = $(this).data('product-id');
+                    const input = $(this).siblings('.quantity');
+                    let quantity = parseInt(input.val());
 
-            if ($(this).hasClass('plus-btn')) {
-                quantity++;
-            } else if ($(this).hasClass('minus-btn') && quantity > 1) {
-                quantity--;
-            }
+                    if ($(this).hasClass('plus-btn')) {
+                        quantity++;
+                    } else if ($(this).hasClass('minus-btn') && quantity > 1) {
+                        quantity--;
+                    }
 
-            input.val(quantity);
-        });
+                    input.val(quantity);
+                });
 
-        // Event listener for Remove button
-        $('#cart-items').on('click', '.remove-btn', function () {
-            const productId = $(this).data('product-id');
-            const index = cart.findIndex(item => item.id === productId);
+                // Event listener for Remove button
+                $('#cart-items').on('click', '.remove-btn', function () {
+                    const productId = $(this).data('product-id');
+                    const index = cart.findIndex(item => item.id === productId);
 
-            if (index !== -1) {
-                cart.splice(index, 1);
-                updateCart();
-            }
-        });
+                    if (index !== -1) {
+                        cart.splice(index, 1);
+                        updateCart();
+                    }
+                });
 
-        // Update the cart and display
-        function updateCart() {
-            const cartItems = $('#cart-items');
-            const cartTotal = $('#cart-total');
+                // Update the cart and display
+                function updateCart() {
+                    const cartItems = $('#cart-items');
+                    const cartTotal = $('#cart-total');
 
-            cartItems.empty();
-            let total = 0;
+                    cartItems.empty();
+                    let total = 0;
 
-            cart.forEach(item => {
-                let imageUrl;
-                // Check for specific products and assign corresponding images
-                if (item.productType === 'powder') {
-                    imageUrl = 'img/powder.jpg';
-                } else if (item.productType === 'tablets') {
-                    imageUrl = 'img/tablets.jpg';
-                } else if (item.productType === 'syringe') {
-                    imageUrl = 'img/syringe.jpg';
-                } else {
-                    // Use a default image for other products
-                    imageUrl = 'img/default.jpg';
-                }
+                    cart.forEach(item => {
+                        let imageUrl;
+                        // Check for specific products and assign corresponding images
+                        if (item.productType === 'powder') {
+                            imageUrl = 'img/powder.jpg';
+                        } else if (item.productType === 'tablets') {
+                            imageUrl = 'img/tablets.jpg';
+                        } else if (item.productType === 'syringe') {
+                            imageUrl = 'img/syringe.jpg';
+                        } else {
+                            // Use a default image for other products
+                            imageUrl = 'img/default.jpg';
+                        }
 
-                const li = `<li>
+                        const li = `<li>
               <img src="${imageUrl}" alt="${item.name}" style="width: 50px; height: 50px; margin-right: 10px;">
               ${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} items)
               <button class="remove-btn" data-product-id="${item.id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 </svg></button>
           </li>`;
-                cartItems.append(li);
-                total += item.price * item.quantity;
-            });
+                        cartItems.append(li);
+                        total += item.price * item.quantity;
+                    });
 
-            cartTotal.text(`$${total.toFixed(2)}`);
-        }
-    </script>
+                    cartTotal.text(`$${total.toFixed(2)}`);
+                }
+            </script>
 
-    <script>
-        // Function to show the popup
-        function showPopup() {
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('popupContainer').style.display = 'block';
-        }
+            <script>
+                // Function to show the popup
+                function showPopup() {
+                    document.getElementById('overlay').style.display = 'block';
+                    document.getElementById('popupContainer').style.display = 'block';
+                }
 
-        // Function to hide the popup
-        function hidePopup() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('popupContainer').style.display = 'none';
-        }
-    </script>
-    <script>
-        document.querySelector('.card-number-input').oninput = () => {
-            document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input')
-                .value;
-        }
+                // Function to hide the popup
+                function hidePopup() {
+                    document.getElementById('overlay').style.display = 'none';
+                    document.getElementById('popupContainer').style.display = 'none';
+                }
+            </script>
+            <script>
+                document.querySelector('.card-number-input').oninput = () => {
+                    document.querySelector('.card-number-box').innerText = document.querySelector(
+                            '.card-number-input')
+                        .value;
+                }
 
-        document.querySelector('.card-holder-input').oninput = () => {
-            document.querySelector('.card-holder-name').innerText = document.querySelector('.card-holder-input')
-                .value;
-        }
+                document.querySelector('.card-holder-input').oninput = () => {
+                    document.querySelector('.card-holder-name').innerText = document.querySelector(
+                            '.card-holder-input')
+                        .value;
+                }
 
-        document.querySelector('.month-input').oninput = () => {
-            document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
-        }
+                document.querySelector('.month-input').oninput = () => {
+                    document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
+                }
 
-        document.querySelector('.year-input').oninput = () => {
-            document.querySelector('.exp-year').innerText = document.querySelector('.year-input').value;
-        }
+                document.querySelector('.year-input').oninput = () => {
+                    document.querySelector('.exp-year').innerText = document.querySelector('.year-input').value;
+                }
 
-        document.querySelector('.cvv-input').onmouseenter = () => {
-            document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(-180deg)';
-            document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(0deg)';
-        }
+                document.querySelector('.cvv-input').onmouseenter = () => {
+                    document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(-180deg)';
+                    document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(0deg)';
+                }
 
-        document.querySelector('.cvv-input').onmouseleave = () => {
-            document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(0deg)';
-            document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(180deg)';
-        }
+                document.querySelector('.cvv-input').onmouseleave = () => {
+                    document.querySelector('.front').style.transform = 'perspective(1000px) rotateY(0deg)';
+                    document.querySelector('.back').style.transform = 'perspective(1000px) rotateY(180deg)';
+                }
 
-        document.querySelector('.cvv-input').oninput = () => {
-            document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
-        }
-    </script>
+                document.querySelector('.cvv-input').oninput = () => {
+                    document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
+                }
+            </script>
 
 
 
